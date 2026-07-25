@@ -1,0 +1,34 @@
+package main
+
+import "fmt"
+
+func (e email) cost() int {
+	if e.isSubscribed {
+		cost := len(e.body) * 2
+		return int(cost)
+	} else {
+		cost := len(e.body) * 5
+		return int(cost)
+	}
+}
+
+func (e email) format() string {
+	if e.isSubscribed {
+		return fmt.Sprintf("'%v' | Subscribed", e.body)
+	}
+	return fmt.Sprintf("'%v' | Not Subscribed", e.body)
+
+}
+
+type expense interface {
+	cost() int
+}
+
+type formatter interface {
+	format() string
+}
+
+type email struct {
+	isSubscribed bool
+	body         string
+}
